@@ -1,0 +1,23 @@
+{% extends 'w_base_test2.html' %}
+{% block content %}
+
+<form action="/edit/condo" method="post">
+    <div class="form_edit">
+        <div class="Form">
+            <div class="Form-Item">
+                <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>編集</p>
+                    <input name="room" type="text" value="{{room['room']}}" class="Form-Item-Input" placeholder="例）桔梗">
+                    <input name = "id" type="hidden" value="{{room['id']}}" >
+            </div>
+            <div>
+                <input type="submit" value="送信" class="btn1">
+            </div>
+        </div>    
+    </div>
+</form>
+
+<div class="btn_top1">
+    <a href="/" type="button" class="btn5">トップに戻る</a>
+</div> 
+    
+{% endblock %}

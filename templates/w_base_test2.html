@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="application-name" content="My Maintenance Note"/>
+    <meta name="msapplication-square70x70logo" content="small.jpg"/>
+    <meta name="msapplication-square150x150logo" content="medium.jpg"/>
+    <meta name="msapplication-wide310x150logo" content="wide.jpg"/>	
+    <meta name="msapplication-square310x310logo" content="large.jpg"/>
+    <meta name="msapplication-TileColor" content="#FAA500"/>
+    <title>Winkel メンテ記録</title>
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/w_style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/common.js"></script>
+    <!-- <link rel="icon" type="image/png" href="/akarennga_180.png"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/w_apple-touch-icon.png">
+    <link rel="shortcut icon" href="https://mymaintenancenote20210703.herokuapp.com/" type="image/vnd.microsoft.icon"> 
+    <link rel="icon" href="/static/img/w_favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <div>
+            <a class="top" href="/">Render Winkelメンテナンス記録</a>
+        </div>
+        <div class="drawer_menu">
+            <div class="drawer_bg"></div>
+            <button type="button" class="drawer_button">
+                <span class="drawer_bar drawer_bar1"></span>
+                <span class="drawer_bar drawer_bar2"></span>
+                <span class="drawer_bar drawer_bar3"></span>
+                <span class="drawer_menu_text drawer_text">MENU</span>
+                <span class="drawer_close drawer_text">CLOSE</span>
+            </button>
+            <nav class="drawer_nav_wrapper">
+                <ul class="drawer_nav">
+                    <li>
+                        <a href="#"><i class="fas fa-igloo my-gray fa-fw"></i>コンドミニアム</a>
+                        <span class="touch-btn"><i class="blogicon-chevron-down lg"></i></span>
+                        <ul class="second-level">
+                            <li><a href="/w_itemlist/1">若草</a></li>
+                            <li><a href="/w_itemlist/2">藍</a></li>
+                            <li><a href="/w_itemlist/3">葉月</a></li>
+                            <li><a href="/w_itemlist/4">胡桃</a></li>
+                            <li><a href="/w_itemlist/5">日和</a></li>
+                            <li><a href="/w_itemlist/6">風花</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-home my-gray fa-fw"></i>別荘 </a>
+                        <span class="touch-btn"><i class="blogicon-chevron-down lg"></i></span>
+                        <ul class="second-level">
+                            <li><a href="/w_itemlist/7">A1棟</a></li>
+                            <li><a href="/w_itemlist/8">A2棟</a></li>
+                            <li><a href="/w_itemlist/9">A3棟</a></li>
+                            <li><a href="/w_itemlist/10">A4棟</a></li>
+                            <li><a href="/w_itemlist/11">B1棟</a></li>
+                            <li><a href="/w_itemlist/12">B2棟</a></li>
+                            <li><a href="/w_itemlist/13">C1棟</a></li>
+                            <li><a href="/w_itemlist/14">C2棟</a></li>
+                            <li><a href="/w_itemlist/15">E1棟</a></li>
+                            <li><a href="/w_itemlist/16">S1棟</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-campground my-gray fa-fw"></i>キャンプ場 </a>
+                        <span class="touch-btn"><i class="blogicon-chevron-down lg"></i></span>
+                        <ul class="second-level">
+                            <li><a href="/w_itemlist/17">朝里川温泉</a></li>
+                            <li><a href="/w_itemlist/18">望洋シャンツェ</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/notice/w_tasklist"><i class="fas fa-envelope-open-text my-orange fa-fw"></i>通知リスト<i class="blogicon-chevron-down"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- jQuery読み込み -->
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+        <script>
+        $(function () {
+        
+            $('.drawer_button').click(function () {
+                $(this).toggleClass('active');
+                $('.drawer_bg').fadeToggle();
+                $('nav').toggleClass('open');
+            })
+            $('.drawer_bg').click(function () {
+                $(this).fadeOut();
+                $('.drawer_button').removeClass('active');
+                $('nav').removeClass('open');
+            });
+            $(".touch-btn").on("click", function () {
+                $(this).next().slideToggle();
+            });
+        })
+        </script>
+
+    </header>
+
+
+    {% block content %}
+
+    <a href="#" class="sc_btn" id="sc_top">↑</a>
+
+    {% endblock %}
+    <!-- <p style="background-color: rgb(102, 55, 148); ">これはフッターです</p> -->
+</body>
+
+<!-- 追加 -->
+<footer>
+    <p class="footer">Copyright 赤レンガ 2021</p>
+</footer>    
+
+</html>

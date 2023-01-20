@@ -1,0 +1,129 @@
+{% extends 'w_base_test2.html' %}
+{% block content %}
+
+<h2>"{{room}}"アイテムリスト</h2>
+
+<table class="table_list" width="80%">      
+    <thead>
+        <tr>
+            <!-- <th>番号</th> -->
+            <th>アイテム</th>
+            <th>製造日</th>
+            <th>製造番号</th>
+            <th>使用開始日</th>
+            <!-- <th>実施日</th>
+            <th>作業内容</th>
+            <th>次回通知</th>
+            <th>通知</th> -->
+            <th></th>
+
+        </tr>
+    </thead>
+    {% for item in w_item_list %}
+    <tbody>
+        <tr>
+            <th label="アイテム"><a href="/w_tasklist/{{id}}/{{item['t_id']}}" class="btn4">{{item['item']}}</a></th>
+            <td label="製造日　"><p>{{item["pro_date"]}}</p></td>
+            <td label="製造番号"><p>{{item["pro_number"]}}</p></td>
+            <td label="使用開始日"><p>{{item["set_date"]}}</p></td>
+            <!-- <td label="実施日　"><p>{{item["t_date"]}}</p></td>
+            <td label="作業内容"><p>{{item["task"]}}</p></td>
+            <td label="次回通知"><p>{{item["notice"]}}</p></td>
+            <td label="通知"><p>{{item["nt_id"]}}</p></td> -->
+            <td>
+                <div class="btn_top">
+                    <a href="/edit/w_itemlist/{{id}}/{{item['taskid']}}" class="btn4">編集</a>
+                    <a href="/del/w_itemlist/{{id}}/{{item['taskid']}}" onclick="return confirm('削除しますか？')" class="btn4">削除</a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+
+    {% endfor %}
+
+</table>
+
+<form action="/add/w_itemlist/{{id}}" method="POST">
+    <!-- 上のaction, method は送り先 -->
+        <h3>アイテム追加</h3>
+
+    <div class="Form">
+        <div class="Form-Item">   
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>アイテム</p>
+            <input type="text" name="item"  class="Form-Item-Input" list="item_list" placeholder="optionクリックもしくはテキスト入力" autocomplete="off">
+            <datalist class="Form-Item-Input" id="item_list">
+                <option value="1.換気扇">1.換気扇</option>
+                <option value="2.ストーブ">2.ストーブ</option>
+                <option value="3.湯沸かし">3.湯沸かし</option>
+                <option value="4.ボイラー">4.ボイラー</option>
+                <option value="5.キッチン回り">5.キッチン回り</option>
+                <option value="6.扇風機">6.扇風機</option>
+                <option value="7.網戸">7.網戸</option>
+                <option value="8.タイマー">8.タイマー</option>
+                <option value="9.照明">9.照明</option>
+                <option value="10.消防器具">10.消防器具</option>
+                <option value="11.風呂配管">11.風呂配管</option>
+            </datalist>
+        </div> 
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>t_id<br>ｱｲﾃﾑ頭数字</p>
+            <input type="integer" name="t_id"  class="Form-Item-Input">
+        </div> 
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>製造日　</p>
+            <input type="date" name="pro_date" class="Form-Item-Input" placeholder="例）2021-1-23">
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>製造番号</p>
+            <input type="text" name="pro_number" class="Form-Item-Input" placeholder="例）1111">
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>使用開始日</p>
+            <input type="date" name="set_date" class="Form-Item-Input" placeholder="例）2021-1-23">
+        </div>
+        <!-- <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>作業実施</p>
+            <input type="hidden" name="t_date" class="Form-Item-Input" placeholder="例）2021-1-23">
+        </div> -->
+        <!-- <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>作業内容</p>
+            <input type="hidden" name="task"  class="Form-Item-Input" list="task_list" placeholder="optionクリックもしくはテキスト入力" autocomplete="off">
+            <datalist class="Form-Item-Input" id="task_list">
+                <option value="点検">点検</option>
+                <option value="分解掃除">分解掃除</option>
+                <option value="フィルター交換">フィルター交換</option>
+                <option value="内部清掃">内部清掃</option>
+                <option value="カビ取り">カビ取り</option>
+                <option value="夏タイヤに交換">夏タイヤに交換</option>
+                <option value="冬タイヤに交換">冬タイヤに交換</option>
+                <option value="オイル交換">オイル交換</option>
+                <option value="車検">車検</option>
+                <option value="壁補修、塗装">壁補修、塗装</option>
+            </datalist>
+        </div>        -->
+        <!-- <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>次回通知</p>
+            <input name="notice" type="hidden" class="Form-Item-Input" placeholder="例）2021-1-23">
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>通知要否<br>0:set/1:done</p>
+            <input name="nt_id" type="hidden" value="0" class="Form-Item-Input">
+        </div> -->
+    </div>
+
+<div>  
+    <button type="submit" class="btn1">新規追加</button>
+</div> 
+
+</form>
+
+<!-- <div class="btn_top">
+    <a href="/list/uti" class="btn4">＜＜おうちごとリスト</a>
+    <a href="/list/soto" class="btn4">＜＜おそとごとリスト</a>
+</div>             -->
+
+<div class="btn_top1">
+    <a href="/" type="button" class="btn5">トップに戻る</a>
+</div>
+
+{% endblock %}

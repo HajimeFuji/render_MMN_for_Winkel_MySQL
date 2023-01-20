@@ -1,0 +1,64 @@
+{% extends 'w_base_test2.html' %}
+
+{% block content %}
+
+    <h3>作業内容の編集</h3>   
+
+<form action="/edit/w_tasklist/{{id}}" method="POST">
+    <!-- 上のaction, method は送り先 -->
+    <div class="Form">
+        <div>
+            <input type="hidden" value="{{task_list['taskid']}}" name = "taskid">
+            <input type="hidden" value="{{task_list['t_id']}}" name = "t_id">
+            <!-- <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>アイテム</p> -->
+            <input type="hidden" name="item" value="{{task_list['item']}}" class="Form-Item-Input">
+        </div>
+        <div>
+            <!-- <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>製造日</p> -->
+            <input type="hidden" name="pro_date" value="{{task_list['pro_date']}}" class="Form-Item-Input">
+        </div>
+        <div>
+            <!-- <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>製造番号</p> -->
+            <input type="hidden" name="pro_number" value="{{task_list['pro_number']}}" class="Form-Item-Input">
+        </div>
+        <div>
+            <!-- <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>使用開始日</p> -->
+            <input type="hidden" name="set_date" value="{{task_list['set_date']}}" class="Form-Item-Input">
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>作業実施日</p>
+            <input type="date" name="t_date" value="{{task_list['t_date']}}" class="Form-Item-Input">
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>作業内容</p>
+            <input type="text" name="task" value="{{task_list['task']}}" class="Form-Item-Input"　 list="task_list" placeholder="optionクリックもしくはテキスト入力" autocomplete="off">
+            <datalist class="Form-Item-Input" id="task_list">
+                <option value="点検">点検</option>
+                <option value="分解掃除">分解掃除</option>
+                <option value="フィルター交換">フィルター交換</option>
+                <option value="内部清掃">内部清掃</option>
+                <option value="カビ取り">カビ取り</option>
+                <option value="夏タイヤに交換">夏タイヤに交換</option>
+                <option value="冬タイヤに交換">冬タイヤに交換</option>
+                <option value="オイル交換">オイル交換</option>
+                <option value="車検">車検</option>
+                <option value="壁補修、塗装">壁補修、塗装</option>
+            </datalist>
+        </div> 
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required"></span>次回通知</p>
+            <input  type="date" name="notice" value="{{task_list['notice']}}" class="Form-Item-Input">
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>通知要否<br>要/1:不要or済み</p>
+            <input name="nt_id" type="integer" value="0" class="Form-Item-Input">
+        </div>
+    </div>
+        <p><input type="submit" value="送信" class="btn1"></p>
+</form>
+
+<div class="btn_top1">
+    <a href="/" type="button" class="btn5">トップに戻る</a>
+</div>  
+
+{% endblock %}

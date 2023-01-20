@@ -1,0 +1,59 @@
+{% extends 'w_base_test2.html' %}
+{% block content %}
+   
+<h2>別荘</h2>
+
+<!-- <table border="1"> -->
+<table class="table_list" width="60%">
+    <thead>   
+        <tr>
+            <th>部屋名</th>
+            <th></th>
+        </tr>
+    </thead> 
+    {% for item in bessou_list %}
+        <tr>
+            <!-- <td>{{item["id"]}}</td> -->
+            <th label="アイテム"><a href="/w_tasklist/{{item['id']}}" class="btn4">{{item['room']}}</a></th>
+            <td>
+                <div class="btn_top">
+                    <a href="/edit/bessou/{{item['id']}}" class="btn4">編集</a>
+                    <a href="/del/bessou/{{item['id']}}" onclick="return confirm('削除しますか？')" class="btn4">削除</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<h3>新規追加</h3>
+
+<form action="/add/room/bessou" method="POST">
+    <!-- 上のaction, method は送り先 -->
+
+        <div class="Form">
+            <div class="Form-Item">
+                <p><input type="hidden" size="10" maxlength="10" name="ios_id" value = "1"></p>   
+                <p class="Form-Item-Label">
+                <span class="Form-Item-Label-Required">必須</span>部屋名</p>
+                <input type="text" name="room" class="Form-Item-Input" placeholder="例）A-8">
+            </div>
+            <div class="Form-Item">
+                <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>部屋名<br>（半角英数）</p>
+                <input type="text" name="table_name" class="Form-Item-Input" placeholder="例）A8">
+            </div>
+        </div>
+
+<!-- -----------------------追加ボタン移動 -->
+    <div>
+        <button type="submit" class="btn1">新規追加</button>
+    </div>    
+
+</form>    
+
+    <div class="btn_top1">
+        <a href="/" type="button" class="btn5">トップに戻る
+            <!-- <button type="button" class="btn1">トップに戻る</button> -->
+        </a>
+    </div>            
+
+{% endblock %}

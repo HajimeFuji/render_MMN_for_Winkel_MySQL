@@ -1,0 +1,50 @@
+{% extends 'w_base_test2.html' %}
+{% block content %}
+
+<h2>来週 "{{today}}～{{time_p7}}" の通知</h2>
+
+<div class="btn_top_1">
+    <a href="/notice/w_tasklist/lw" class="btn4"><<< 先週の通知</a>
+    <a href="/notice/w_tasklist" class="btn4"><< 今週の通知</a>
+</div>  
+
+<table class="table_list" width="80%">
+    <thead>
+        <tr>
+            <th>部屋名</th>
+            <th>アイテム</th>
+            <th>前回作業</th>
+            <th>前回内容</th>
+            <th>通知予定</th>
+            <th>通知実施</th>
+        </tr>
+    </thead>
+    {% for item in nt_list %}  
+        
+    <form action="/notice/w_tasklist/nt_nw/{{item['id']}}/{{item['taskid']}}" method="POST">       
+    <tbody>
+        <tr>
+            <th label="部屋名">{{item["room"]}}</th>
+            <td label="前回作業日">{{item["item"]}}</td>
+            <td label="前回作業日">{{item["t_date"]}}</td>
+            <td label="前回内容">{{item["task"]}}</td>
+            <td label="通知予定日">{{item["notice"]}}</td>
+            <td label="通知実施">
+                <div>
+                    <input type="checkbox" name="nt_id" value="1">
+                        <label>済</label>
+                    <input type="submit" onclick="return confirm('通知リストから削除していいですか')">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    </form>
+
+    {% endfor %}
+</table>
+
+<a href="/">
+    <button type="button" class="btn1">トップページに戻る</button>
+</a>
+
+{% endblock %}
