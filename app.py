@@ -3,6 +3,7 @@ import os
 import sqlite3, datetime as dt
 from flask import Flask, render_template, request, redirect, session
 import psycopg2
+import MySQLdb
 
 # appの名前でFlaskアプリを作っていく
 app = Flask(__name__)
@@ -783,7 +784,11 @@ def add_post_room_condo():
     ios_id = int(ios_id)
     room = request.form.get("room")
     tablename = request.form.get("table_name")
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items")
     tb_list = []
@@ -807,7 +812,11 @@ def add_post_room_bessou():
     ios_id = int(ios_id)
     room = request.form.get("room")
     tablename = request.form.get("table_name")
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items")
     tb_list = []
@@ -831,7 +840,11 @@ def add_post_room_camp():
     ios_id = int(ios_id)
     room = request.form.get("room")
     tablename = request.form.get("table_name")
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     # table_name 取得
     c.execute("select table_name from items")
@@ -853,7 +866,11 @@ def add_post_room_camp():
 # コンドミニアム
 @app.route("/list/condo")
 def condo_list():
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select id, room from items where ios_id = 0")
     room_list=[]
@@ -865,7 +882,11 @@ def condo_list():
 # 別荘
 @app.route("/list/bessou")
 def bessou_list():
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select id, room from items where ios_id = 1")
     room_list=[]
@@ -877,7 +898,11 @@ def bessou_list():
 # キャンプ場
 @app.route("/list/camp")
 def camp_list():
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select id, room from items where ios_id = 2")
     room_list=[]
@@ -889,7 +914,11 @@ def camp_list():
 # コンドミニアムの編集
 @app.route("/edit/condo/<int:id>")
 def edit_room_condo(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select room from items where id=?", (id,))
     room = c.fetchone()[0]
@@ -904,8 +933,12 @@ def update_room_condo():
     item_id = request.form.get("id")
     item_id = int(item_id)
     room = request.form.get("room")
-    conn = sqlite3.connect("w_MN.db")
-    c =conn.cursor()
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
+    c = conn.cursor()
     c.execute("update items set room=? where id = ?", (room,item_id))
     conn.commit()
     c.close()
@@ -914,7 +947,11 @@ def update_room_condo():
 # 別荘リストの編集
 @app.route("/edit/bessou/<int:id>")
 def edit_room_bessou(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select room from items where id=?", (id,))
     room = c.fetchone()[0]
@@ -929,8 +966,12 @@ def update_room_bessou():
     item_id = request.form.get("id")
     item_id = int(item_id)
     room = request.form.get("room")
-    conn = sqlite3.connect("w_MN.db")
-    c =conn.cursor()
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
+    c = conn.cursor()
     c.execute("update items set room=? where id = ?", (room,item_id))
     conn.commit()
     c.close()
@@ -939,7 +980,11 @@ def update_room_bessou():
 # キャンプ場リスト編集
 @app.route("/edit/camp/<int:id>")
 def edit_room_camp(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select room from items where id=?", (id,))
     room = c.fetchone()[0]
@@ -953,8 +998,12 @@ def update_room_camp():
     item_id = request.form.get("id")
     item_id = int(item_id)
     room = request.form.get("room")
-    conn = sqlite3.connect("w_MN.db")
-    c =conn.cursor()
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
+    c = conn.cursor()
     c.execute("update items set room=? where id = ?", (room,item_id))
     conn.commit()
     c.close()
@@ -963,7 +1012,11 @@ def update_room_camp():
 # コンドミニアムストからアイテムの削除
 @app.route("/del/condo/<int:id>")
 def del_room_condo(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id=?", (id,))
     table_name = c.fetchone()[0]
@@ -976,7 +1029,11 @@ def del_room_condo(id):
 # 別荘リストからアイテムの削除
 @app.route("/del/bessou/<int:id>")
 def del_room_bessou(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id=?", (id,))
     table_name = c.fetchone()[0]
@@ -989,7 +1046,11 @@ def del_room_bessou(id):
 # キャンプ場リストからアイテムの削除
 @app.route("/del/camp/<int:id>")
 def del_room_camp(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id=?", (id,))
     table_name = c.fetchone()[0]
@@ -1002,7 +1063,11 @@ def del_room_camp(id):
 # 8/16 部屋ごとのアイテムをリストしてみよう
 @app.route("/w_itemlist/<int:id>")
 def w_itemlist(id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select id from items where id = ?" , (id,))
     id = c.fetchone()[0]
@@ -1034,7 +1099,11 @@ def add_post_w_item(id):
     notice = request.form.get("notice")
     nt_id = request.form.get("nt_id")
     # nt_id = int(nt_id)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
         #()はタプル型
     c.execute("select table_name from items where id = ?" , (id,))
@@ -1048,7 +1117,11 @@ def add_post_w_item(id):
 # 8/17 編集変更したデータで部屋ごとのアイテム更新
 @app.route("/edit/w_itemlist/<int:id>/<int:taskid>")
 def edit_w_itemlist_get(id,taskid):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
@@ -1084,8 +1157,12 @@ def w_itemlist_update(id):
     task = request.form.get("task")
     notice = request.form.get("notice")
     nt_id = request.form.get("nt_id")
-    conn = sqlite3.connect("w_MN.db")
-    c =conn.cursor()
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
+    c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
     c.execute("update %s set item=? where taskid = ?" %(table_name), (item,taskid,))
@@ -1103,7 +1180,11 @@ def w_itemlist_update(id):
 # 8/17 部屋ごとのアイテムリストからアイテムの削除
 @app.route("/del/w_itemlist/<int:id>/<int:taskid>")
 def del_w_itemlist(id,taskid):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
@@ -1115,7 +1196,11 @@ def del_w_itemlist(id,taskid):
 # 8/17 部屋ごとのアイテムのタスクをリストしてみよう
 @app.route("/w_tasklist/<int:id>/<int:t_id>")
 def w_tasklist(id,t_id):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select id from items where id = ?" , (id,))
     id = c.fetchone()[0]
@@ -1153,7 +1238,11 @@ def add_post_w_task(id,t_id):
     notice = request.form.get("notice")
     nt_id = request.form.get("nt_id")
     nt_id = int(nt_id)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
         #()はタプル型
     c.execute("select table_name from items where id = ?" , (id,))
@@ -1167,7 +1256,11 @@ def add_post_w_task(id,t_id):
 # 8/18 部屋ごとのアイテムのタスク編集変更したデータで更新
 @app.route("/edit/w_tasklist/<int:id>/<int:taskid>")
 def edit_w_tasklist_get(id,taskid):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
@@ -1207,8 +1300,12 @@ def w_tasklist_update(id):
     task = request.form.get("task")
     notice = request.form.get("notice")
     nt_id = request.form.get("nt_id")
-    conn = sqlite3.connect("w_MN.db")
-    c =conn.cursor()
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
+    c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
     c.execute("update %s set t_id=? where taskid = ?" %(table_name), (t_id,taskid,))
@@ -1227,7 +1324,11 @@ def w_tasklist_update(id):
 #8/18 部屋ごとのアイテムのタスクリストから タスクの削除
 @app.route("/del/w_tasklist/<int:id>/<int:t_id>/<int:taskid>")
 def del_w_tasklist(id,t_id,taskid):
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
@@ -1242,7 +1343,11 @@ def del_w_tasklist(id,t_id,taskid):
 def notice_w_tasklist():
     today = dt.date.today()
     time7 = today + dt.timedelta(days=-7)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items")
     tbname_list = []
@@ -1273,7 +1378,11 @@ def notice_w_tasklist_nt(id,taskid):
 # まず実施済タスクのnt_idを1にupdateする
     nt_id = request.form.get("nt_id")
     nt_id = int(nt_id)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
@@ -1303,7 +1412,11 @@ def notice_w_tasklist_lw():
     today = dt.date.today()
     time7 = today + dt.timedelta(days=-7)
     time14 = today + dt.timedelta(days=-14)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items")
     tbname_list = []
@@ -1335,7 +1448,11 @@ def notice_w_tasklist_nt_lw(id,taskid):
 # まず実施済タスクのnt_idを1にupdateする
     nt_id = request.form.get("nt_id")
     nt_id = int(nt_id)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
@@ -1366,7 +1483,11 @@ def notice_w_tasklist_nw():
     time7 = today + dt.timedelta(days=-7)
     time14 = today + dt.timedelta(days=-14)
     time_p7 = today + dt.timedelta(days=7)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items")
     tbname_list = []
@@ -1399,7 +1520,11 @@ def notice_w_tasklist_nt_nw(id,taskid):
 # まず実施済タスクのnt_idを1にupdateする
     nt_id = request.form.get("nt_id")
     nt_id = int(nt_id)
-    conn = sqlite3.connect("w_MN.db")
+    conn = MySQLdb.connect(
+        user = 'HajimeFujii',
+        passwd = '04fujkan11',
+        host = 'localhost',
+        db = 'winkel')
     c = conn.cursor()
     c.execute("select table_name from items where id = ?" , (id,))
     table_name = c.fetchone()[0]
